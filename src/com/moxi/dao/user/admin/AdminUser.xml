@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moxi.dao.user.admin.IAdminUserMapper" >
+	<!-- 查询用户信息 -->
+	<select id="getLogin" resultType="AdminUser" parameterType="MXParams">
+		SELECT
+			id,
+			username,
+			email,
+			forbiden,
+			role_id AS roleId
+		FROM
+			cpq_admin_user
+		WHERE username =#{account} AND password =#{password} AND is_delete = 0
+	</select>
+	
+	<!-- 查询出所有的用户 -->
+	<select id="findUsers" resultType="java.util.Map" parameterType="MXParams">
+		SELECT
+			a.id,
+			a.username,
+			a.create_time AS createTime,
+			a.update_time AS updateTime,
+			a.is_delete AS isDelete,
+			a. PASSWORD,
+			a.forbiden,
+			a.role_id AS roleId,
+			a.telephone,
+			a.email,
+			a.age,
+			a.male,
+			a.male,
+			a.birthday,
+			a.address,
+			b.`name`
+		FROM
+			cpq_admin_user a
+		LEFT JOIN cpq_role b ON a.role_id = b.id
+		WHERE a.is_delete = 0
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="@com.moxi.util.TmStringUtils@isNotEmpty(keyword)">
+				and  a.`username` LIKE '%${keyword}%'
+			</if>
+		</trim>
+		ORDER BY ${order}
+		LIMIT #{pageNo} ,#{pageSize};
+	</select>
+	
+	<!-- 统计用户数量 -->
+	<select id="count" resultType="int" parameterType="MXParams">
+		SELECT
+			count(1) 
+		FROM
+			cpq_admin_user a
+		WHERE a.is_delete = 0
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			
+			<if test="@com.moxi.util.TmStringUtils@isNotEmpty(keyword)">
+				and  a.`username` LIKE '%${keyword}%'
+			</if>
+			
+		</trim>
+	</select>
+	
+	<!-- 查询用户信息 map-->
+	<select id="getAdminUser" resultType="AdminUser" parameterType="int">
+		SELECT
+			a.id,
+			a.username,
+			a.create_time AS createTime,
+			a.update_time AS updateTime,
+			a.is_delete AS isDelete,
+			a.password,
+			a.forbiden,
+			a.role_id AS roleId,
+			a.telephone,
+			a.email,
+			a.age,
+			a.male,
+			a.male,
+			a.birthday,
+			a.address
+		FROM
+			cpq_admin_user  a
+		WHERE a.id = #{id}
+	</select>
+	
+	<!-- 保存用户信息 -->
+	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="AdminUser" >
+	    insert into cpq_admin_user
+	    <trim prefix="(" suffix=")" suffixOverrides="," >
+	      <if test="id != null" >
+	        id,
+	      </if>
+	      <if test="username != null" >
+	        username,
+	      </if>
+	      <if test="telephone != null" >
+	        telephone,
+	      </if>
+	      <if test="email != null" >
+	        email,
+	      </if>
+	      <if test="age != null" >
+	        age,
+	      </if>
+	       <if test="male != null" >
+	        male,
+	      </if>
+	      <if test="address != null" >
+	        address,
+	      </if>
+	      <if test="isDelete != null" >
+	        is_delete,
+	      </if>
+	      <if test="roleId != null" >
+	        role_id,
+	      </if>
+	      <if test="password != null" >
+	        password,
+	      </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	      <if test="id != null" >
+	        #{id,jdbcType=INTEGER},
+	      </if>
+	      <if test="username != null" >
+	        #{username,jdbcType=VARCHAR},
+	      </if>
+	      <if test="telephone != null" >
+	        #{telephone,jdbcType=VARCHAR},
+	      </if>
+	      <if test="email != null" >
+	        #{email,jdbcType=VARCHAR},
+	      </if>
+	       <if test="age != null" >
+	        #{age,jdbcType=INTEGER},
+	      </if>
+	       <if test="male != null" >
+	        #{male,jdbcType=INTEGER},
+	      </if>
+	       <if test="address != null" >
+	        #{address,jdbcType=VARCHAR},
+	      </if>
+	       <if test="isDelete != null" >
+	        #{isDelete,jdbcType=INTEGER},
+	      </if>
+	      <if test="roleId != null" >
+	        #{roleId,jdbcType=INTEGER},
+	      </if>
+	      <if test="password != null" >
+	        #{password,jdbcType=INTEGER},
+	      </if>
+	    </trim>
+  </insert>
+  
+  
+    <!-- 更新数据 -->
+	<update id="update" parameterType="AdminUser">
+		update cpq_admin_user 
+		<set>
+			<if test="username!=null">username=#{username},</if>
+			<if test="isDelete!=null">is_delete=#{isDelete},</if>
+			<if test="telephone!=null">telephone=#{telephone},</if>
+			<if test="email!=null">email=#{email},</if>
+			<if test="roleId!=null">role_id=#{roleId},</if>
+			<if test="age!=null">age=#{age},</if>
+			<if test="male!=null">male=#{male},</if>
+			<if test="address!=null">address=#{address},</if>
+			<if test="password!=null">password=#{password},</if>
+			<if test="forbiden!=null">forbiden=#{forbiden},</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	
+	<!-- 删除数据 -->
+	<delete id="delete" parameterType="MXParams">
+		update cpq_admin_user set is_delete = 1 where id = #{id}
+	</delete>
+	
+	<!-- 批量删除数据 -->
+	<delete id="deleteSelected">
+		update cpq_admin_user set is_delete = 1 where id in  
+      	<foreach collection="array" item = "id" open="(" separator="," close=")">  
+            #{id}  
+    	</foreach>  
+	</delete>
+	
+	<!-- 查询出用户的角色名 -->
+	<select id="getUserRole" resultType="java.util.Map">
+		SELECT
+			t1.username,
+			t2.`name` AS roleName
+		FROM
+			cpq_admin_user t1
+		LEFT JOIN cpq_role t2 ON t1.role_id = t2.id
+		WHERE
+			t1.id = #{userId};
+	</select>
+	
+	
+	<!-- 查询出用户的角色名 -->
+	<select id="findRoles" resultType="Role">
+		SELECT
+			id,
+			`name`
+		FROM
+			cpq_role
+		WHERE
+			is_delete = 0
+	</select>
+	
+</mapper>

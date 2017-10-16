@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moxi.dao.channel.web.IWebChannelMapper" >
+	 <resultMap id="BaseResultMap" type="com.moxi.model.Channel" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+
+	<!-- 查询所有的频道web -->
+	<select id="findWebAllChannels" resultType="java.util.Map">
+		SELECT
+			id,
+			description
+		FROM
+			wcb_channel
+		WHERE
+			is_delete = 0			
+	</select>
+	
+	<!-- 根据父频道查询出子频道 -->
+	<select id="findParentChannelList" resultType="java.util.Map" parameterType="int">
+		SELECT
+			a.id AS cid,
+			a.`name` AS cname,
+			a.description,
+			a.create_time,
+			b.`name` AS pname,
+			b.id AS pid
+		FROM
+			wcb_channel a
+		LEFT JOIN wcb_channel b ON a.parent_id = b.id
+		WHERE
+			a.parent_id = #{parentId}
+	</select>
+	
+	
+	
+	
+	
+</mapper>

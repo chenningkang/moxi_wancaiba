@@ -1,0 +1,137 @@
+-webkit-transform: translateZ(0);
+overflow-y:scroll !important; overflow-y:auto;
+html{color:#333;_text-overflow:ellipsis}
+html{-webkit-text-size-adjust: none;}
+body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,select,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{margin:0;padding:0; vertical-align:middle; }
+body,button,input,select,textarea{font-size:1em;font-family:Arial,'瀹嬩綋'}
+h1,h2,h3,h4,h5,h6{font-size:1em;}
+small,cite,code,em,th,i,b{font-size:1em;font-style:normal;font-weight:500}
+input,select,textarea,button{font-size:1em;}
+input,button,select,textarea{outline:none}
+button{border:0px;}
+textarea{resize:none;}
+button,input[type=button],input[type=submit]{cursor:pointer}
+input[type=search]{-webkit-appearance:textfield}
+fieldset,img,iframe{border:0 none}
+img{display:inline-block;vertical-align:bottom; }
+iframe{display:block}
+ul,ol{list-style:none}
+li{vertical-align:middle;text-overflow:ellipsis;}
+q:before,q:after{content:''}
+a{text-decoration:none;color:#181818;text-overflow:ellipsis;}
+a:link {color:#181818}
+a:visited {color:#101010}
+a:hover {color:#ae0927; text-decoration:none;}
+a:active {color:#0000ff}
+.none{display:none}
+.strong{font-weight:bold;}
+.bold{font-weight:bold;}
+.red{color:#ff3300;}
+a.red{color:#ff3300;}
+ul li{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;width:80%}
+/***************/
+
+
+.box{width:100%;margin:0 auto;}
+.boxnofl{width:98%;clear:both;float:none;margin-left:1%;margin-right:1%;}
+.fix{clear:both;float:none;overflow:hidden;height:1px;line-height:1px;width:100%;font-size:0px;background:none;}
+
+.logotop{width:98%; height:85px;clear:both;margin-left:1%;margin-right:1%;margin-top:2px;overflow:hidden}
+.logotop .logolf{width:48%;float:left; background: #7650f6;}
+.logotop .logort{width:100%;float:left; background: #7650f6; margin-left:2%}
+.logotop .zones{float:left;width:100%;text-align:center;font-size:1.2em;font-family:"寰蒋闆呴粦";}
+.logotop .zones li{width:100%}
+
+.navtop{width:100%; background:#38ACC2;height:300px;clear:both;margin-left:0%;margin-right:0%;}
+.navtop ul li{ width:25%; float:left; height:38px;line-height:38px; color:#fff; text-align:center; font-family:'Microsoft YaHei';}
+.navtop ul li a{font-size:1.5em; color:#fff;}
+.navtop ul li a:hover{text-decoration:underline;}
+
+.nav .topnav1{width:100%; float:left;}
+.nav .topnav1 ul li{width:20%; height:30px; line-height:30px; float:left; text-align:center;}
+.nav .topnav1 ul li a{font-size:1.2em; color:#000;}
+
+
+
+.nav .title{width: 100%;float: left;line-height: 27px;background: #B2DBEE;font-size:1.2em;}
+.nav .title span{padding-left: 20px;margin-left: 10px;font-weight:bold;background:url("../../images/webimg/t1.gif") no-repeat left center;}
+/*寮�缁撴灉鍖哄煙*/
+/* .nav .kjdata{width:100%;height:246px;border:1px solid #e2e0fa;padding-bottom:8px;} */
+
+.nav .kjh {font-family:'Microsoft YaHei';margin:0 10px 0 5px}
+.nav .kjh table{width:100%;margin:0 auto;}
+.nav .kjh td{height:32px;font-family:'Microsoft YaHei';font-size:1em; text-align:center;line-height:27px;}
+.nav .kjh .hui{font-size:1em;}
+/*寮�鐞冨彿鑳屾櫙鑹�/
+.nav .kjh .red_q{background:url(../../images/webimg/red_bg.gif) no-repeat center center;width:10%;height:21px; text-align:center;color:#fff;display:block;line-height:21px;float:left;}
+.nav .kjh .blue_q{ background:url(../../images/webimg/blue_bg.gif) no-repeat center center;width:10%;height:21px; text-align:center;color:#fff;display:block;line-height:21px;float:left;}
+.nav .kjh .h_q{ background:url(../../images/webimg/h_bg.gif) no-repeat center center;width:10%;height:21px; text-align:center;color:#000;display:block;line-height:21px;float:left;}
+
+.sc{width:98%;float:left; overflow:hidden;margin-left:1%;margin-right:1%}
+.sc .more_detail{display:block;float:right;margin-right:10px}
+.sc .title{width: 100%;float: left;line-height: 27px;background: #B2DBEE;font-size:1.2em;}
+.sc .title span{padding-left: 20px;margin-left: 10px;font-weight:bold;background:url("../../images/webimg/t1.gif") no-repeat left center;}
+/*褰╃エ璧勮涓�*/
+.sc .lottery{width:100%;margin-top:5px;float:left;background:#f2f2f5;}/* border:1px solid #e2e0fa; */
+.sc .lottery ul{width:100%;padding:3px 0 0 10px;float:left;}
+.sc .lottery ul li{background:url(../../images/webimg/p1.gif) no-repeat left center;padding-left:20px;line-height:28px;font-size:1.2em;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.sc .lottery ul li.best{background:url(../../images/webimg/best.gif) no-repeat left center;padding-left:20px;}
+.sc .lottery ul li a{font-size:1em;}
+
+.footer{text-align:center; overflow:hidden;margin:16px auto;line-height:22px;border:1px solid #ccc;border-width:2px 0 0 0;padding:10px 0 5px 0;}
+.footer strong{color:#ae0927;font-weight:bold;margin:0 auto}
+.footer p{margin:0 0 5px 0;}
+
+/*缃《*/
+.return {width:40px;height:40px;position:fixed;right:12px;bottom:16px;display:none;}
+.return span{width:40px;height:40px;display:block;background:url("../../images/webimg/icon_top.png") no-repeat;background-color:#444;background-position:center;cursor: pointer;
+				border-radius:3px;}
+/*褰撳墠浣嶇疆*/
+.lc{width:98%;float:left; overflow:hidden;margin-left:1%;margin-right:1%}
+.lc .location{width: 100%;float: left;line-height: 34px;background: #B2DBEE;font-size:1em;padding-left:10px}
+
+/*鍒楄〃椤�/
+.sc .list{width:100%;overflow:hidden;clear:both;border:1px solid #ddd;margin:10px auto}
+.sc .list .title{width:100%;padding:0 16px;background:#f9f9f9;border-bottom:1px solid #efefef;height:32px;line-height:32px;}
+.sc .list .title h2{font-size:1.2em;}
+.sc .list .cpage{margin-right:10px}
+.sc .list ul{width:100%;float:left;padding:10px;}
+.sc .list ul li{float:left;width:94%;margin:5px;padding:2px 0;border:1px solid #efefef;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.sc .list ul li span.num{width:20px;float:left; margin-left:3px;text-align:center;display:block; background:url(../../images/webimg/lbg.gif) no-repeat left center;}
+.sc .list ul li a{font-size:1.2em;margin-left:9px;}
+.sc .list ul li a.best{background:url(../../images/webimg/best.gif) no-repeat left center;padding-left:20px;}
+
+/*棰戦亾椤�/
+.chan{width:100%;overflow:hidden;float:left;margin-top:10px;}
+
+.chan .kjnum{width:100%;float:left;border:1px solid #ddd;border-width:2px 1px 1px 1px;}
+
+
+/*褰╃鍥炬爣*/
+ol.kjinfo{padding:10px;float:left;width:100%;height:90px;overflow: hidden;}
+ol.sd{background:url(../../images/webimg/3d_icon.gif) no-repeat 8px 40px;}
+ol.ssq{background:url(../../images/webimg/ssq_icon.gif) no-repeat 8px 40px;}
+ol.dlt{background:url(../../images/webimg/dlt_icon.gif) no-repeat 8px 40px;}
+ol.qxc{background:url(../../images/webimg/qxc_icon.gif) no-repeat 8px 40px;}
+ol.qlc{background:url(../../images/webimg/qlc_icon.gif) no-repeat 8px 40px;}
+ol.p3{background:url(../../images/webimg/p3_icon.gif) no-repeat 8px 40px;}
+
+ol.kjinfo{font-family: 'Microsoft YaHei';}
+ol.kjinfo li{font-size:1.5em;line-height:32px;padding-left:80px;}
+ol.kjinfo li.title{padding:0px;line-height:18px;margin-bottom:10px;}
+ol.kjinfo li.numli{margin-top:4px}
+ol.kjinfo .red_num{background:url(../../images/webimg/red_num.gif) no-repeat center center;color:#fff;text-align: center;}
+ol.kjinfo .red_num{font-size:0.8em;display:block;width:30px;height:30px;line-height:30px;float:left;}
+ol.kjinfo .y_num{background:url(/static/images/y_num.gif) no-repeat center center;color:#333;text-align: center;}
+ol.kjinfo .y_num{font-size:0.8em;display:block;width:30px;height:30px;line-height:30px;float:left;}
+ol.kjinfo .blue_num{background:url(../../images/webimg/blue_num.gif) no-repeat center center;color:#fff;text-align: center;}
+ol.kjinfo .blue_num{font-size:0.8em;display:block;width:30px;height:30px;line-height:30px;float:left;}
+
+/*璇︽儏椤�/
+.detail{width:100%;overflow:hidden;clear:both;margin:10px auto;}
+.detail .content{width:100%;border:1px solid #ddd;overflow: hidden;float:left;border-width:2px 1px 1px 1px;margin:0px;}
+.detail .content h2{font-family:'Microsoft YaHei';text-align:center;color:#990000;font-weight:bold;font-size:1.5em;padding:10px 0 0 0;}
+.detail .content .about{ text-align:center;color:#666;border-top:1px dotted #cccccc; margin:10px 0 0 0;padding:10px 0 0 0;}
+.detail .content .text{margin:3px 0;font-weight:normal;letter-spacing:0.1em; font-size: 1.2em; line-height: 200%; font-family: 'Microsoft YaHei';white-space:normal; width:100%; overflow:auto}
+.detail .content .text p{margin:9px 0;text-indent:2.1em;}
+.box .innertext{width:90%;margin:0 auto}

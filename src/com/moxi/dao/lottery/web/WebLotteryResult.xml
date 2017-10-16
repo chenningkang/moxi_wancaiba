@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moxi.dao.lottery.web.IWebLotteryMapper" >
+	<!-- 保存开奖信息 -->
+	<select id="findLotteryByType" parameterType="MXParams" resultType="LotteryPojo">
+		SELECT
+			qihao,
+			dateline,
+			number,
+			type,
+			creat_time AS createTime,
+			sys_create_time AS sysCreateTime
+		FROM
+			cpq_lottery_result
+		WHERE
+			type = #{lotteryType}
+		ORDER BY
+			qihao DESC
+		<trim prefix="LIMIT" suffixOverrides="," >
+	      <if test="@com.moxi.util.TmStringUtils@isNotEmpty(pageNo)">
+				#{pageNo},
+		  </if>
+	      <if test="@com.moxi.util.TmStringUtils@isNotEmpty(pageSize)">
+				#{pageSize},
+		  </if>
+	    </trim>
+	</select>
+	
+	<!-- 统计彩票类型的彩票数 -->
+	<select id="count" resultType="int" parameterType="MXParams">
+		SELECT
+			count(1)
+		FROM
+			cpq_lottery_result
+		WHERE
+			is_delete = 0
+		AND type = #{lotteryType}
+	</select>
+</mapper>

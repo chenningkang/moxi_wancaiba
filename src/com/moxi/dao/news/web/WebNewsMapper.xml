@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.moxi.dao.news.web.IWebNewsMapper" >
+  <resultMap id="BaseResultMap" type="com.moxi.model.News" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="is_top" property="isTop" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.moxi.model.News" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, create_time, update_time, user_id, is_delete, is_top, status
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wcb_news
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+	 <select id="getWebNewsList" resultType="News" parameterType="MXParams">
+			SELECT
+				id,
+				title,
+				is_top as isTop
+			FROM
+				wcb_news
+			WHERE
+			  is_delete = 0
+			AND `status` = 1
+			<if test="@com.moxi.util.TmStringUtils@isNotEmpty(order)">
+				ORDER BY ${order}
+			</if>
+			<trim prefix="LIMIT" suffixOverrides="," >
+		      <if test="@com.moxi.util.TmStringUtils@isNotEmpty(pageNo)">
+					#{pageNo},
+			  </if>
+		      <if test="@com.moxi.util.TmStringUtils@isNotEmpty(pageSize)">
+					#{pageSize},
+			  </if>
+		    </trim>
+		</select>
+	
+		<!-- 查询web内容详情-->
+	<select id="getWebNewsDetail" resultType="java.util.Map" parameterType="int">
+		SELECT
+			a.id,
+			a.title,
+			a.content,
+			a.create_time AS createTime,
+			d.username
+		FROM
+			wcb_news a
+		LEFT JOIN wcb_admin_user d ON a.user_id = d.id
+		WHERE
+			a.id = #{id}
+		AND a.is_delete = 0
+		AND a.`status` = 1
+	</select>
+	
+		<!-- *********查询对应频道的更多一览-->
+	<select id="findWebNewsMoreList" resultType="java.util.Map" parameterType="MXParams">
+		SELECT
+			a.id,
+			a.title,
+			a.is_top AS isTop,
+			a.create_time AS creatTime
+		FROM
+			wcb_news a
+		WHERE
+		  a.is_delete = 0
+		AND a.`status` = 1
+		<if test="@com.moxi.util.TmStringUtils@isNotEmpty(order)">
+			ORDER BY ${order}
+		</if>
+		<trim prefix="LIMIT" suffixOverrides="," >
+	      <if test="@com.moxi.util.TmStringUtils@isNotEmpty(pageNo)">
+				#{pageNo},
+		  </if>
+	      <if test="@com.moxi.util.TmStringUtils@isNotEmpty(pageSize)">
+				#{pageSize},
+		  </if>
+	    </trim>
+	</select>
+	
+		<!-- 统计内容总数，用于分页 -->
+	<select id="count" resultType="int" parameterType="MXParams">
+		SELECT
+			count(1)
+		FROM
+			wcb_news
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			AND is_delete = 0
+			AND `status` = 1
+		</trim>
+	</select>
+	
+
+
+
+</mapper>

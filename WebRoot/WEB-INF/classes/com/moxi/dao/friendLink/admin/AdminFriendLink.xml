@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moxi.dao.friendLink.admin.IAdminFriendLinkMapper" >
+
+
+	<!-- 查询友情链接 List-->
+	<select id="findFriendLinks" resultType="java.util.Map" parameterType="MXParams">
+		SELECT
+			a.id,
+			a.name,
+			a.description,
+			a.path,
+			a.url,
+			a.user_id AS userId,
+			a.create_time AS createTime,
+			a.update_time AS updateTime,
+			a.is_top  As isTop,
+			a.is_delete As isDelete,
+			a.status,
+			b.username,
+			a.sort
+		FROM
+			cpq_friend_link a
+		LEFT JOIN cpq_admin_user b ON a.user_id = b.id
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			and a.is_delete = 0 
+			<if test="@com.moxi.util.TmStringUtils@isNotEmpty(keyword)">
+				and  a.`name` LIKE '%${keyword}%'
+			</if>
+		</trim>
+		ORDER BY ${order}
+		<trim prefix="LIMIT" suffixOverrides="," >
+	      <if test="@com.moxi.util.TmStringUtils@isNotEmpty(pageNo)">
+				#{pageNo},
+		  </if>
+	      <if test="@com.moxi.util.TmStringUtils@isNotEmpty(pageSize)">
+				#{pageSize},
+		  </if>
+	    </trim>
+	</select>
+	
+	<!-- 查询友情链接 map-->
+	<select id="getFriendLink" resultType="LinkManager" parameterType="int">
+		SELECT
+			a.id,
+			a.name,
+			a.description,
+			a.path,
+			a.url,
+			a.user_id AS userId,
+			a.create_time AS createTime,
+			a.update_time AS updateTime,
+			a.is_top  As isTop,
+			a.is_delete As isDelete,
+			a.status,
+			a.sort
+		FROM
+			cpq_friend_link a
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 统计友情链接总数，用于分页 -->
+	<select id="count" resultType="int" parameterType="MXParams">
+		SELECT
+			count(1) 
+		FROM
+			cpq_friend_link a
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			and a.is_delete = 0
+			<if test="@com.moxi.util.TmStringUtils@isNotEmpty(keyword)">
+				and  a.`name` LIKE '%${keyword}%'
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 更新数据 -->
+	<update id="update" parameterType="LinkManager">
+		update cpq_friend_link 
+		<set>
+			<if test="name!=null">name=#{name},</if>
+			<if test="description!=null">description=#{description},</if>
+			<if test="path!=null">path=#{path},</if>
+			<if test="userId!=null">user_id=#{userId},</if>
+			<if test="isDelete!=null">is_delete=#{isDelete},</if>
+			<if test="updateTime!=null">update_time=#{updateTime},</if>
+			<if test="status!=null">status=#{status},</if>
+			<if test="isTop!=null">is_top=#{isTop},</if>
+			<if test="sort!=null">sort=#{sort},</if>
+			<if test="url!=null">url=#{url},</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	
+	<!-- 删除数据 -->
+	<delete id="delete" parameterType="MXParams">
+	delete from cpq_content  where id = #{id}
+		update cpq_friend_link set is_delete = 1 where id = #{id}
+	</delete>
+	
+	
+	<!-- 批量删除数据 -->
+	<delete id="deleteSelected">
+		update cpq_friend_link set is_delete = 1 where id in  
+      	<foreach collection="array" item = "id" open="(" separator="," close=")">  
+            #{id}  
+    	</foreach>  
+	</delete>
+	
+	
+	<!-- 保存数据 -->
+	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="LinkManager" >
+	    insert into cpq_friend_link
+	    <trim prefix="(" suffix=")" suffixOverrides="," >
+	      <if test="id != null" >
+	        id,
+	      </if>
+	      <if test="name != null" >
+	        name,
+	      </if>
+	      <if test="description != null" >
+	        description,
+	      </if>
+	      <if test="path != null" >
+	        path,
+	      </if>
+	      <if test="userId != null" >
+	        user_id,
+	      </if>
+	       <if test="url != null" >
+	        url,
+	      </if>
+	       <if test="createTime != null" >
+	        create_time,
+	      </if>
+	       <if test="sort != null" >
+	        sort,
+	      </if>
+	
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	      <if test="id != null" >
+	        #{id,jdbcType=INTEGER},
+	      </if>
+	      <if test="name != null" >
+	        #{name,jdbcType=VARCHAR},
+	      </if>
+	      <if test="description != null" >
+	        #{description,jdbcType=VARCHAR},
+	      </if>
+	      <if test="path != null" >
+	        #{path,jdbcType=VARCHAR},
+	      </if>
+	      <if test="userId != null" >
+	        #{userId,jdbcType=INTEGER},
+	      </if>
+	      <if test="url != null" >
+	        #{url,jdbcType=VARCHAR},
+	      </if>
+	      <if test="createTime != null" >
+	        #{createTime,jdbcType=INTEGER},
+	      </if>
+	      <if test="sort != null" >
+	        #{sort,jdbcType=INTEGER},
+	      </if>
+    </trim>
+  </insert>
+	
+</mapper>

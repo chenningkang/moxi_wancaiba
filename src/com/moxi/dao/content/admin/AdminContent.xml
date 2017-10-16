@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moxi.dao.content.admin.IAdminContentMapper" >
+
+
+	<!-- 查询内容信息 List-->
+	<select id="findContents" resultType="java.util.Map" parameterType="MXParams">
+		SELECT
+			a.id,
+			a.title,
+			a.content,
+			a.create_time AS createTime,
+			a.update_time AS updateTime,
+			a.user_id AS userId,
+			a.tag,
+			a.is_top AS isTop,
+			a.is_delete AS isDelete,
+			a. STATUS,
+			a.channel_id AS channelId,
+			a.editor,
+			a.special_topic AS specialTopic,
+			a.description,
+			b.username,
+			c.`name`
+		FROM
+			cpq_content a
+		LEFT JOIN cpq_admin_user b ON a.user_id = b.id
+		LEFT JOIN cpq_channel c ON a.channel_id = c.id 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			and a.is_delete = 0 
+			<if test="@com.moxi.util.TmStringUtils@isNotEmpty(channelId)">
+				and a.channel_id = #{channelId}
+			</if>
+			<if test="@com.moxi.util.TmStringUtils@isNotEmpty(keyword)">
+				and  c.`name` LIKE '%${keyword}%'
+			</if>
+			<if test="@com.moxi.util.TmStringUtils@isNotEmpty(isDelete)">
+				and  a.is_delete = #{isDelete}
+			</if>
+			<if test="@com.moxi.util.TmStringUtils@isNotEmpty(keyword1)">
+				and  a.`title` LIKE '%${keyword1}%'
+			</if>
+		</trim>
+		ORDER BY ${order}
+		<trim prefix="LIMIT" suffixOverrides="," >
+	      <if test="@com.moxi.util.TmStringUtils@isNotEmpty(pageNo)">
+				#{pageNo},
+		  </if>
+	      <if test="@com.moxi.util.TmStringUtils@isNotEmpty(pageSize)">
+				#{pageSize},
+		  </if>
+	    </trim>				
+	</select>
+	
+	<!-- 查询内容信息 map-->
+	<select id="getContent" resultType="Content" parameterType="int">
+		SELECT
+			id,
+			title,
+			content,
+			create_time as createTime,
+			update_time as updateTime,
+			user_id as userId,
+			tag,
+			is_top as isTop,
+			is_delete as isDelete,
+			status ,
+			channel_id as channelId,
+			editor,
+			special_topic  as specialTopic,
+			description
+		FROM
+			cpq_content 
+		WHERE id = #{id}
+	</select>
+	
+	
+	<select id="getContentById" resultType="java.util.Map" parameterType="int">
+		SELECT
+			a.id,
+			a.title,
+			a.content,
+			a.create_time AS createTime,
+			a.update_time AS updateTime,
+			a.user_id AS userId,
+			a.tag,
+			a.is_top AS isTop,
+			a.is_delete AS isDelete,
+			a. STATUS,
+			a.channel_id AS channelId,
+			a.editor,
+			a.special_topic AS specialTopic,
+			a.description,
+			b.username,
+			c.`name`
+		FROM
+			cpq_content a
+		LEFT JOIN cpq_admin_user b ON a.user_id = b.id
+		LEFT JOIN cpq_channel c ON a.channel_id = c.id 
+		WHERE a.id = #{id}
+	</select>
+	
+
+
+	
+	<!-- 统计内容总数，用于分页 -->
+	<select id="count" resultType="int" parameterType="MXParams">
+		SELECT
+			COUNT(1)
+		FROM
+			cpq_content t1
+		LEFT JOIN cpq_channel t2 ON t1.channel_id = t2.id 
+		<trim prefix="WHERE" prefixOverrides="AND | OR"> 
+			and t1.is_delete = 0
+			<if test="@com.moxi.util.TmStringUtils@isNotEmpty(channelId)">
+				and  t1.channel_id = #{channelId}
+			</if>
+			<if test="@com.moxi.util.TmStringUtils@isNotEmpty(keyword)">
+				and   t2.`name` LIKE '%${keyword}%'
+			</if>
+			<if test="@com.moxi.util.TmStringUtils@isNotEmpty(keyword1)">
+				and  t1.`title` LIKE '%${keyword1}%'
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 更新数据 -->
+	<update id="update" parameterType="Content">
+		update cpq_content 
+		<set>
+			<if test="title!=null">title=#{title},</if>
+			<if test="tag!=null">tag=#{tag},</if>
+			<if test="description!=null">description=#{description},</if>
+			<if test="content!=null">content=#{content},</if>
+			<if test="editor!=null">editor=#{editor},</if>
+			<if test="channelId!=null">channel_id=#{channelId},</if>
+			<if test="isDelete!=null">is_delete=#{isDelete},</if>
+			<if test="isTop!=null">is_top=#{isTop},</if>
+			<if test="status!=null">status=#{status},</if>
+			<if test="staticUrl!=null">static_url=#{staticUrl},</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	
+	<!-- 删除数据 -->
+	<delete id="delete" parameterType="MXParams">
+		delete from cpq_content  where id = #{id}
+<!-- 		update cpq_content set is_delete = 1 where id = #{id} -->
+	</delete>
+	
+<!-- 批量删除数据 -->
+	<delete id="deleteSelected">
+<!-- 		update cpq_content set is_delete = 1 where id in  -->
+		delete from cpq_content  where id in 
+      	<foreach collection="array" item = "id" open="(" separator="," close=")">  
+            #{id}  
+    	</foreach>  
+	</delete>
+	
+	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="Content" >
+    insert into cpq_content
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="tag != null" >
+        tag,
+      </if>
+      <if test="editor != null" >
+        editor,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+       <if test="channelId != null" >
+        channel_id,
+      </if>
+        <if test="userId != null" >
+        user_id,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="editor != null" >
+        #{editor,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=INTEGER},
+      </if>
+       <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+
+    </trim>
+  </insert>
+	
+</mapper>

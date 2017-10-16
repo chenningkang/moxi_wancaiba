@@ -1,0 +1,4 @@
+eclipse.preferences.version=1
+validator.Checked=WebRoot/ueditor/ueditor.all.min.js,WebRoot/ueditor/jsp,WebRoot/ueditor/ueditor.all.js,WebRoot/ueditor/ueditor.config.js,WebRoot/resources/sg,WebRoot/ueditor/third-party
+validator.Revalidate=true
+validator.Unchecked=

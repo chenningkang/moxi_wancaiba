@@ -1,0 +1,192 @@
+.login-page{ background:#f8f8f8; position:fixed; top:0; left:0; right:0; bottom:0; background-size: auto 100%;}
+.login-page .hd-wrap{ background:#7650f6; }
+.login-page  .hd-logo{font-size:.16rem; }
+
+.login-ar{ color:#fff;font-size:.12rem; top:.12rem; right:.11rem;}
+
+.login-wrap{ padding:.2rem 0rem 0;}
+.login-wrap input{ width:100%; background:#fff; border:none; outline:none; line-height:28px; font-size:.12rem; }
+.login-wrap .line{ overflow:hidden; position:relative; background-color: #fff; padding: .1rem .15rem; border-top: 1px solid #d3d3d3; border-bottom: 1px solid #d3d3d3;}
+.dntop{ border-top:none !important;}
+.dnbottom{ border-bottom:none !important;}
+.line .err,.line .passport{ color:#fff; padding:.1rem 0;}
+.line .passport{ opacity:0.5;}
+.login-btn{ background:#7650f6; color:#fff; text-align:center; font-size:.12rem; line-height:.4rem;margin:.3rem .15rem .15rem; border-radius:3px;}
+.opacity{ -webkit-opacity:0.5;-moz-opacity:0.5;opacity:0.5;}
+.yma{position: absolute; color: #fbfbfb; font-size: 12px; top: .03rem; right: 0.15rem;  height: .42rem; text-align:center;  width:1rem; cursor:pointer;}
+.yma img{ width:100%; height:100%;}
+.reg-sheet-line{ height:1px; background:#d3d3d3;margin:0 .15rem;}
+
+
+
+
+.reg-plan-div {
+    clear: both;
+    overflow: hidden;
+    margin-top: .1rem
+}
+
+.reg-plan-map {
+    clear: both;
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+    width: 80%;
+    height: .3rem;
+    margin: 0 auto
+}
+
+.reg-plan-map *{
+    position: absolute;
+    top: 0;
+    left: 0
+}
+
+.reg-plan-map i {
+    width: .1rem;
+    height: .1rem;   
+    z-index: 10;
+	background:#d3d3d3;
+	border-radius:50%;
+	text-indent:-99999px;
+	top:.1rem;
+}
+
+.reg-plan-map i.active {
+    background:#7650f6;
+}
+
+.reg-plan-map .i1 {
+    left: 50%;
+}
+
+.reg-plan-map .i2 {
+    right: 0;
+    left: auto
+}
+
+.reg-plan-map .i3 {
+    left: 33%;
+    margin-left: -13px
+}
+
+.reg-plan-map .i4 {
+    left: 66%;
+    margin-left: -13px
+}
+
+.reg-plan-map span {
+    border-top: 2px solid #d3d3d3;
+    width: 49%;
+    top: .15rem;
+    left: 9px
+}
+
+.reg-plan-map-1 span {
+    width: 32%
+}
+
+.reg-plan-map span.active {
+    border-color: #7650f6
+}
+
+.reg-plan-map .sp1 {
+    left: 50%
+}
+
+.reg-plan-map .sp2 {
+    left: 33%
+}
+
+.reg-plan-map .sp3 {
+    left: 66%
+}
+
+.reg-plan-text {
+   
+    clear: both;
+    position: relative;
+    height: .3rem;
+    width: 80%;
+    margin: 0 auto;
+    color: #9a9a9a
+}
+
+.reg-plan-text span {
+    font-size:.12rem;
+    position: absolute;
+    width: .8rem;
+    text-align: center;
+    left: 0;
+    top: 0
+}
+
+.reg-plan-text span.active {
+    color: #333
+}
+
+.reg-plan-text .spt0{
+	 left: -.3rem;
+}
+.reg-plan-text .spt1 {
+    left: 50%;
+    margin-left: -.4rem;
+}
+
+.reg-plan-text .spt2 {
+    left: auto;
+    right: -.3rem;
+}
+
+.reg-plan-text .spt3 {
+    left: 26%
+}
+
+.reg-plan-text .spt4 {
+    left: 54%
+}
+
+
+.reg-sheet-protocol{ padding:0 .15rem;}
+.reg-sheet-protocol span{vertical-align:middle;}
+.reg-sheet-iradio{ width:.15rem; height:.15rem; border-radius:50%; background:#d3d3d3; display:inline-block; }
+.reg-sheet-protocol a{color:#7650f6;}
+.reg-sheet-iradio{ cursor:pointer;}
+.reg-sheet-protocol .active{ background:#7650f6 url(../img/tick_64f95bb.png) center no-repeat ; background-size:80%;}
+
+.line p{ float:left; line-height:.28rem; font-size:.13rem;}
+.o-lt{ width:20%;}
+.o-lt2{ width:1.2rem;}
+.o-lt3{ width:75%;}
+.o-lr{ float:right !important;}
+.reg-sheet-tip {
+    min-height: .3rem;
+    overflow: hidden;
+    clear: both
+}
+.org-btn{ 
+	display: inline-block;
+    padding: 0 10px;
+    color: #fff;
+    font-size: .12rem;
+    background-color: #f60;
+    border-radius: 3px;
+	text-decoration: none;
+    text-align: center;}
+.on{ background:#d3d3d3 !important;}
+.hide{ display:none;}
+
+.login-barb .lineicon{
+	padding: 0px .32rem;
+    height: 28px;
+    line-height: 28px;
+    background: #fff url(/resources/images/logo/login.png) no-repeat 0 -99999px / 25px auto;
+	background-size:25px 100px;
+    overflow: hidden}
+.login-barb .i-username {
+    background-position: 0 2px;
+}
+.login-barb .i-password {
+    background-position: 0 -36px;
+}
+

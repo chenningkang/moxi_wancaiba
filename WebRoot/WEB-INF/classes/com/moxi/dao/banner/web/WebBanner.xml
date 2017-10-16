@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moxi.dao.banner.web.IWebBannerMapper" >
+
+	<!-- 查询banner信息 List-->
+	<!-- <select id="findWebBanners" resultType="java.util.Map" parameterType="MXParams">
+		SELECT
+			t1.`name`,
+			t1.path,
+			t1.urlLink,
+			t1.width,
+			t1.height,
+			t2.cname
+		FROM
+			cpq_banner t1
+		LEFT JOIN cpq_company t2 ON t1.com_id = t2.id
+		WHERE
+			t1.`status` = 1
+		AND t1.is_delete = 0
+		AND t2.cname LIKE '%${companyName}%'
+		<trim prefix="LIMIT" suffixOverrides="," >
+	      <if test="@com.moxi.util.TmStringUtils@isNotEmpty(pageNo)">
+				#{pageNo},
+		  </if>
+	      <if test="@com.moxi.util.TmStringUtils@isNotEmpty(pageSize)">
+				#{pageSize},
+		  </if>
+	    </trim>
+	</select> -->
+	
+	<!-- web首页banner信息 -->
+	<select id="findWebBanners" resultType="Banner" parameterType="MXParams">
+		SELECT
+			name,
+			path,
+			urllink AS urlLink,
+			width,
+			height,
+			sort
+		FROM
+			cpq_banner
+		WHERE
+			location_id = #{bannerLocationId}
+		AND is_delete = 0
+		AND status = 1
+		ORDER BY
+			sort ASC
+	</select>
+	
+</mapper>

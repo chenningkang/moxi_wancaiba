@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moxi.dao.lottery.admin.ILotteryMapper" >
+	<!-- 保存开奖信息 -->
+	<insert id="saveLotteryResult" parameterType="LotteryPojo">
+		INSERT INTO cpq_lottery_result (
+			qihao,
+			dateline,
+			number,
+			type,
+			sys_create_time,
+			is_delete
+		)
+		VALUES
+		(#{qihao},#{dateline},#{number},#{type},#{sysCreateTime},#{isDelete})
+	</insert>
+</mapper>
