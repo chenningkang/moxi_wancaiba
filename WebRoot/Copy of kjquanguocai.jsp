@@ -901,18 +901,8 @@
  		
 		};
 		
-	
-		
-		
-		
 		
 	</script>
-	
-
-
-	<script src="/js/datepicker.js"></script>
-	<script src="/js/base.js?v=2017"></script>
-
 	<script src="/js/kj.js"></script>
 </body>
 </html>
